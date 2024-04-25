@@ -3,7 +3,7 @@ version: '3.7'
 
 services:
   db:
-    image: postgres:10-6-alpine
+    image: postgres:16.2
     restart: "no"
     environment:
       USER: ${DB_USER}
@@ -31,8 +31,7 @@ services:
 
 volumes:
   pgdata:
-    driver:local
 
 networks:
   default:
-    name: Stock_service_network
+    name: stock_service_network

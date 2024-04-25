@@ -1,0 +1,38 @@
+
+version: '3.7'
+
+services:
+  db:
+    image: postgres:10-6-alpine
+    restart: "no"
+    environment:
+      USER: ${DB_USER}
+      PASSWORD: ${DB_PASSWORD}
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - .init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+
+  stockservice:
+    image: ${STOCK_SERVICE_IMAGE}
+    restart: "no"
+    ports:
+      - "5027:3001"
+    environment:
+      - LOG_LEVEL=INFO
+      - TIMEOUT=${TIMEOUT}
+      - DB_URL=${DB_URL}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+    driver:local
+
+networks:
+  default:
+    name: Stock_service_network

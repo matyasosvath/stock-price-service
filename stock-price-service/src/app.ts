@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import actuator from "express-actuator";
 import cron from "node-cron";
 

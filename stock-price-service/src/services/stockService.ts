@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import logger from "../logger/logger";
 import fetchQuote from "./fetchStock";
 import { StockPrice } from "../model/stock";
+import { sequelize } from "../model/db";
 
 async function storeStockQuote(symbol: string): Promise<void> {
   try {
@@ -10,13 +11,16 @@ async function storeStockQuote(symbol: string): Promise<void> {
     const quote = res.data;
     const price = quote["c"];
 
-    await StockPrice.create({
-      symbol: symbol,
-      value: price,
-      dateTime: new Date(),
+    await sequelize.transaction(async (t) => {
+      await StockPrice.create(
+        {
+          symbol: symbol,
+          value: price,
+          dateTime: new Date(),
+        },
+        { transaction: t }
+      );
     });
-
-    // TODO transaction commit
 
   } catch (error) {
     logger.error(`Error saving stock quote for ${symbol}`, error);
@@ -25,7 +29,6 @@ async function storeStockQuote(symbol: string): Promise<void> {
 }
 
 async function getDistinctSymbols(): Promise<string[]> {
-
   const rows = await StockPrice.findAll({
     attributes: ["symbol"],
     group: ["symbol"],
@@ -40,6 +43,7 @@ async function getDataForSymbol(
   symbol: string,
   limit: number = 10
 ): Promise<StockPrice[]> {
+
   const rows = await StockPrice.findAll({
     where: {
       symbol: symbol,

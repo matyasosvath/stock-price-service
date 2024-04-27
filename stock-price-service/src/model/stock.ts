@@ -1,4 +1,4 @@
-import { sequelize } from '../services/util/db';
+import {sequelize} from './db';
 import {
   Model,
   DataTypes,
@@ -15,6 +15,9 @@ export class StockPrice extends Model<
   declare dateTime: Date;
 }
 
+console.log("sequalize");
+console.log(sequelize);
+
 StockPrice.init(
   {
     symbol: DataTypes.STRING,
@@ -22,7 +25,7 @@ StockPrice.init(
     dateTime: DataTypes.DATE,
   },
   {
-    sequelize,
+    sequelize: sequelize!,
     modelName: "stockPrice",
     timestamps: false,
   }

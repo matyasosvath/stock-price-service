@@ -5,17 +5,17 @@ import logger from "../logger/logger";
 
 const baseURL = 'https://finnhub.io/api/v1/';
 const apiKey = process.env.API_KEY;
-const companyProfile = '/stock/profile';
+const quoteUrl = '/quote';
 
 
-const fetchCompanyProfile = async (symbol: string): Promise<any> => {
+const fetchQuote = async (symbol: string): Promise<any> => {
   try {
 
-    const url = baseURL + companyProfile + '?' + `symbol=${symbol}&token=${apiKey}`
+    const url = baseURL + quoteUrl + '?' + `symbol=${symbol}&token=${apiKey}`
+    console.log(`url: ${url}`);
     const res = await axios.get(url);
     logger.info(`Fetched stock prices for ${symbol}`);
     logger.info(`Data for ${symbol}`);
-    // logger.info(res.data);
     return res;
 
   } catch (error) {
@@ -24,4 +24,4 @@ const fetchCompanyProfile = async (symbol: string): Promise<any> => {
   }
 };
 
-export default fetchCompanyProfile;
+export default fetchQuote;

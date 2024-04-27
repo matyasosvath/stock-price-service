@@ -3,49 +3,48 @@ import { Client } from "pg";
 
 let sequelize: Sequelize;
 
+const user = process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+const database = process.env.DB_NAME;
+const host = process.env.DB_URL;
+const port = 5432;
+
+// console.log(`user: ${user}`);
+// console.log(`password: ${password}`);
+// console.log(`database: ${database}`);
+// console.log(`host: ${host}`);
+// console.log(`port: ${port}`);
+
 (async () => {
   const client = new Client({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: 5432,
-    database: process.env.DB_NAME,
-    logging: true,
+    user: user,
+    password: password,
+    port: port,
+    database: "postgres",
+    // database: 'stock',
+    host: host,
+    logging: false,
   });
 
-  sequelize = new Sequelize(
-    process.env.DB_NAME!,
-    process.env.DB_USER!,
-    process.env.DB_PASSWORD!,
-    {
-      dialect: "postgres",
-      host: process.env.DB_URL,
-      port: 5432,
-      logging: false,
-    }
-  );
+  sequelize = new Sequelize(database, user, password, {
+    dialect: "postgres",
+    host: host,
+    port: port,
+    logging: false,
+  });
 
-  console.log("new sequalize()");
-  console.log(sequelize);
+  await client.connect(); // Connect to the PostgreSQL server
 
-  // TODO check if db exists
+  // TODO create the "stock" database if it doesn't exist
+  // const createDbQuery = `CREATE DATABASE ${database};`;
+  // await client.query(createDbQuery);
 
-  client.connect();
-  console.log("client.connect()");
-  console.log(sequelize);
+  console.log(`Database ${database} created or already exists.`);
+
+  // await client.end();
 
   await sequelize.sync({ alter: true });
-  console.log("sequelize.sync");
-  console.log(sequelize);
 
-  try {
-    await sequelize.authenticate();
-    console.log(
-      "Connection to the database has been established successfully."
-    );
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
 })();
-
 
 export { sequelize };

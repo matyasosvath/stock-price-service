@@ -6,14 +6,20 @@ services:
     image: postgres:16.2
     restart: "no"
     environment:
-      USER: ${DB_USER}
-      PASSWORD: ${DB_PASSWORD}
-      PGDATA: /var/lib/postgresql/data
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /data/postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - .init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
   stockservice:
     image: ${STOCK_SERVICE_IMAGE}
@@ -23,9 +29,12 @@ services:
     environment:
       - LOG_LEVEL=INFO
       - TIMEOUT=${TIMEOUT}
+      - DB_NAME=${DB_NAME}
       - DB_URL=${DB_URL}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - API_KEY=${API_KEY}
+      - ALLOWED_ORIGINS=http://localhost
     depends_on:
       - db
 

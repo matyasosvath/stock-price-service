@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "02a1a3c1-6742-4434-95d3-f867512907df",
+		"name": "stock service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19982569"
+	},
+	"item": [
+		{
+			"name": "info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5027/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5027",
+					"path": [
+						"info"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "info",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5027/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5027",
+							"path": [
+								"info"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "105",
+							"type": "text"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"69-EWLpaZUvYVg4paQx5O08pz6lgB0\"",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Apr 2024 16:40:58 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"type": "text"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"build\": {\n        \"name\": \"stock-price-service\",\n        \"description\": \"Stock price prediction service\",\n        \"version\": \"0.0.1\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5027/stock/AAPL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5027",
+					"path": [
+						"stock",
+						"AAPL"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get stock",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5027/stock/AAPL",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5027",
+							"path": [
+								"stock",
+								"AAPL"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "94",
+							"type": "text"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5e-PW0MzpF3ojc5Hkpe7L+wHq0ib1o\"",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Apr 2024 17:26:46 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"type": "text"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"lastUpdatedTime\": \"2024-04-27T17:26:46.304Z\",\n    \"currentStockPrice\": 169.3,\n    \"movingAverage\": 169.3\n}"
+				}
+			]
+		},
+		{
+			"name": "monitor stock",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5027/stock/AMZN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5027",
+					"path": [
+						"stock",
+						"AMZN"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "monitor stock",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5027/stock/MSFT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5027",
+							"path": [
+								"stock",
+								"MSFT"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "JSON",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"type": "text"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"type": "text"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53",
+							"type": "text"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"35-CcXT2uYTOXiv9GFWIQIaiMmGsNg\"",
+							"type": "text"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Apr 2024 16:40:48 GMT",
+							"type": "text"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"type": "text"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Company quote fetched. Database updated\"\n}"
+				}
+			]
+		}
+	]
+}

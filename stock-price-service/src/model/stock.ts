@@ -13,7 +13,7 @@ export class StockPrice extends Model<
 > {
   declare id: CreationOptional<number>;
   declare symbol: string;
-  declare value: number;
+  declare value: number;  // TODO rename to price
   declare dateTime: Date;
 }
 

@@ -15,7 +15,6 @@ const fetchQuote = async (symbol: string): Promise<any> => {
     console.log(`url: ${url}`);
     const res = await axios.get(url);
     logger.info(`Fetched stock prices for ${symbol}`);
-    logger.info(`Data for ${symbol}`);
     return res;
 
   } catch (error) {

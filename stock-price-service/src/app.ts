@@ -17,9 +17,6 @@ app.use(actuator());
 
 app.get("/stock/:symbol", async (req, res) => {
   try {
-    // TODO get all values for this symbol;
-    // TODO calculate moving averages
-    // TODO update db, add new symbol
 
     const { symbol } = req.params;
 
@@ -28,11 +25,6 @@ app.get("/stock/:symbol", async (req, res) => {
 
     return res.status(200).json(result);
 
-    // return res.status(200).json({
-    //   lastUpdatedTime: lastUpdatedTime,
-    //   currentStockPrice: currentStockPrice,
-    //   movingAverage: movingAverage,
-    // });
   } catch (error) {
     logger.debug(error);
     return res

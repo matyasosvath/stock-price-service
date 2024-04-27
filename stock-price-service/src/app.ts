@@ -16,9 +16,10 @@ const app = express();
 app.use(actuator());
 
 app.get("/stock/:symbol", async (req, res) => {
-  try {
 
-    const { symbol } = req.params;
+  const { symbol } = req.params;
+
+  try {
 
     await storeStockQuote(symbol);
     const result = await getSymbolInfos(symbol);
@@ -29,7 +30,7 @@ app.get("/stock/:symbol", async (req, res) => {
     logger.debug(error);
     return res
       .status(500)
-      .json({ message: "Could not calculate averages for quotes." });
+      .json({ message: `Could not calculate moving average for symbol ${symbol}` });
   }
 });
 

@@ -3,7 +3,11 @@ import actuator from "express-actuator";
 import cron from "node-cron";
 
 import logger from "./logger/logger";
-import { storeStockQuote, getDistinctSymbols } from "./services/stockService";
+import {
+  storeStockQuote,
+  getDistinctSymbols,
+  getSymbolInfos,
+} from "./services/stockService";
 
 const port = process.env.PORT || 3001;
 
@@ -19,15 +23,16 @@ app.get("/stock/:symbol", async (req, res) => {
 
     const { symbol } = req.params;
 
-    const lastUpdatedTime = 0;
-    const currentStockPrice = 0;
-    const movingAverage = 0;
+    await storeStockQuote(symbol);
+    const result = await getSymbolInfos(symbol);
 
-    return res.status(200).json({
-      lastUpdatedTime: lastUpdatedTime,
-      currentStockPrice: currentStockPrice,
-      movingAverage: movingAverage,
-    });
+    return res.status(200).json(result);
+
+    // return res.status(200).json({
+    //   lastUpdatedTime: lastUpdatedTime,
+    //   currentStockPrice: currentStockPrice,
+    //   movingAverage: movingAverage,
+    // });
   } catch (error) {
     logger.debug(error);
     return res

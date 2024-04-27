@@ -19,19 +19,80 @@ async function storeStockQuote(symbol: string): Promise<void> {
     // TODO transaction commit
 
   } catch (error) {
-    logger.error("Error saving stock quote:", error);
+    logger.error(`Error saving stock quote for ${symbol}`, error);
     throw new Error();
   }
 }
 
 async function getDistinctSymbols(): Promise<string[]> {
+
   const rows = await StockPrice.findAll({
     attributes: ["symbol"],
     group: ["symbol"],
     raw: true,
   });
+
   const symbols = rows.map((value: any) => value["symbol"]);
   return symbols;
 }
 
-export { storeStockQuote, getDistinctSymbols };
+async function getDataForSymbol(
+  symbol: string,
+  limit: number = 10
+): Promise<StockPrice[]> {
+  const rows = await StockPrice.findAll({
+    where: {
+      symbol: symbol,
+    },
+    order: [["dateTime", "DESC"]],
+    limit: limit,
+  });
+
+  return rows;
+}
+
+async function getSymbolInfos(symbol: string): Promise<any> {
+
+  const data = await getDataForSymbol(symbol);
+
+  let result = {
+    lastUpdatedTime: null,
+    currentStockPrice: null,
+    movingAverage: null,
+  };
+
+  if (data.length === 0) {
+    return result;
+  }
+
+  result.lastUpdatedTime = data[0].dateTime;
+  result.currentStockPrice = data[0].value;
+  result.movingAverage = calculateMovingAverage(data);
+
+  return result;
+}
+
+function calculateMovingAverage(
+  data: StockPrice[],
+  windowSize: number = 10
+): number {
+
+  if (data.length === 0) {
+    return 0;
+  }
+
+  if (data.length < windowSize) {
+    throw new Error("Not enough data points to calculate moving average");
+  }
+
+  let sum = 0;
+  for (let i = 0; i < windowSize; i++) {
+    sum += data[i].value;
+  }
+
+  const result = sum / windowSize;
+
+  return parseFloat(result.toFixed(3));
+}
+
+export { storeStockQuote, getDistinctSymbols, getSymbolInfos };

@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { Client } from "pg";
-import logger from "logger/logger";
+import logger from "../logger/logger";
 
 let sequelize: Sequelize;
 

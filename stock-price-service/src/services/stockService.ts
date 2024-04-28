@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 
 import logger from "../logger/logger";
 import fetchQuote from "./fetchStock";
-import { StockPrice } from "../model/stock";
+import StockPrice from "../model/stock";
 import { sequelize } from "../model/db";
 
 async function storeStockQuote(symbol: string): Promise<void> {
@@ -77,7 +77,7 @@ async function getSymbolInfos(symbol: string): Promise<any> {
 }
 
 function calculateMovingAverage(
-  data: StockPrice[],
+  data: StockPrice[] | any[],
   windowSize: number = 10
 ): number {
 
@@ -90,13 +90,19 @@ function calculateMovingAverage(
   }
 
   let sum = 0;
-  for (let i = 0; i < windowSize; i++) {
+  for (let i = 0; i < data.length; i++) {
     sum += data[i].value;
   }
 
-  const result = sum / windowSize;
+  const result = sum / data.length;
 
   return parseFloat(result.toFixed(3));
 }
 
-export { storeStockQuote, getDistinctSymbols, getSymbolInfos };
+export { 
+  storeStockQuote, 
+  getDistinctSymbols, 
+  getDataForSymbol, 
+  getSymbolInfos, 
+  calculateMovingAverage
+};

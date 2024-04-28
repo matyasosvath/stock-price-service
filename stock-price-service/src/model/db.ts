@@ -1,50 +1,45 @@
-import { Sequelize, Transaction } from "sequelize";
+import { Sequelize } from "sequelize";
 import { Client } from "pg";
 
 let sequelize: Sequelize;
 
-const user = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
-const database = process.env.DB_NAME;
-const host = process.env.DB_URL;
-const port = 5432;
+let connection = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  host: process.env.DB_URL,
+  port: 5432
+};
 
-// console.log(`user: ${user}`);
-// console.log(`password: ${password}`);
-// console.log(`database: ${database}`);
-// console.log(`host: ${host}`);
-// console.log(`port: ${port}`);
+console.log(`connection: ${connection}`);
 
 (async () => {
   const client = new Client({
-    user: user,
-    password: password,
-    port: port,
+    user: connection.user,
+    password: connection.password,
+    port: connection.port,
     database: "postgres",
     // database: 'stock',
-    host: host,
+    host: connection.host,
     logging: false,
   });
 
-  sequelize = new Sequelize(database, user, password, {
+  sequelize = new Sequelize(connection.database, connection.user, connection.password, {
     dialect: "postgres",
-    host: host,
-    port: port,
+    host: connection.host,
+    port: connection.port,
     logging: false,
   });
 
   await client.connect(); // Connect to the PostgreSQL server
 
-  // TODO create the "stock" database if it doesn't exist
   // const createDbQuery = `CREATE DATABASE ${database};`;
   // await client.query(createDbQuery);
 
-  console.log(`Database ${database} created or already exists.`);
-
-  // await client.end();
+  console.log(`Database ${connection.database} created or already exists.`);
 
   await sequelize.sync({ alter: true });
 
 })();
 
-export { sequelize };
+export { sequelize, connection };

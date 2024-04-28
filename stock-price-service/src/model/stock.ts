@@ -7,13 +7,13 @@ import {
   CreationOptional
 } from "sequelize";
 
-export class StockPrice extends Model<
+class StockPrice extends Model<
   InferAttributes<StockPrice>,
   InferCreationAttributes<StockPrice>
 > {
   declare id: CreationOptional<number>;
   declare symbol: string;
-  declare value: number;  // TODO rename to price
+  declare value: number;
   declare dateTime: Date;
 }
 
@@ -34,3 +34,5 @@ StockPrice.init(
     timestamps: false,
   }
 );
+
+export default StockPrice;

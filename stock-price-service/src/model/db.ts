@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { Client } from "pg";
+import logger from "logger/logger";
 
 let sequelize: Sequelize;
 
@@ -10,8 +11,6 @@ let connection = {
   host: process.env.DB_URL,
   port: 5432
 };
-
-console.log(`connection: ${connection}`);
 
 (async () => {
   const client = new Client({
@@ -36,7 +35,7 @@ console.log(`connection: ${connection}`);
   // const createDbQuery = `CREATE DATABASE ${database};`;
   // await client.query(createDbQuery);
 
-  console.log(`Database ${connection.database} created or already exists.`);
+  logger.info(`Database ${connection.database} created or already exists.`);
 
   await sequelize.sync({ alter: true });
 

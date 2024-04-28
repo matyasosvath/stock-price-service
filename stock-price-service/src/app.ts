@@ -15,6 +15,46 @@ const app = express();
 
 app.use(actuator());
 
+
+/**
+ * @swagger
+ * /stock/{symbol}:
+ *   get:
+ *     summary: Get stock information by symbol
+ *     description: Returns stock information including last updated time, current stock price, and moving average.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: "symbol"
+ *         in: "path"
+ *         description: "Stock symbol to fetch information for"
+ *         required: true
+ *         type: "string"
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         schema:
+ *           type: object
+ *           properties:
+ *             lastUpdatedTime:
+ *               type: string
+ *               format: date-time
+ *               description: Time when the stock information was last updated
+ *             currentStockPrice:
+ *               type: number
+ *               description: Current stock price
+ *             movingAverage:
+ *               type: number
+ *               description: Moving average of the stock price
+ *       500:
+ *         description: Internal server error
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Error message
+ */
 app.get("/stock/:symbol", async (req, res) => {
 
   const { symbol } = req.params;
@@ -34,6 +74,40 @@ app.get("/stock/:symbol", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /stock/{symbol}:
+ *   put:
+ *     summary: Start the periodic checks for a given symbol.
+ *     description: Updates stock information in the database for the specified symbol, which will be monitored periodically.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: "symbol"
+ *         in: "path"
+ *         description: "Stock symbol to monitor"
+ *         required: true
+ *         type: "string"
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Confirmation message
+ *               example: "Company quote fetched. Database updated"
+ *       500:
+ *         description: Internal server error
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Error message
+ *               example: "Company quote could not be fetched. Database update failed."
+ */
 app.put("/stock/:symbol", async (req, res) => {
   try {
     const { symbol } = req.params;

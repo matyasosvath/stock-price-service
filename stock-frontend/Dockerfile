@@ -9,6 +9,7 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
-RUN ng build
-EXPOSE 80
-CMD ["ng", "serve"]
+
+EXPOSE 4200
+
+CMD ["ng", "serve", "--host", "0.0.0.0"]

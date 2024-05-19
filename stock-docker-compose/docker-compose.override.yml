@@ -1,7 +1,9 @@
-version: '3.7'
-
 services:
   stockservice:
     build: 
       context: ../stock-price-service
+
+  frontend:
+    build:
+      context: ../stock-frontend
 

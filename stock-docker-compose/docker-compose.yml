@@ -1,6 +1,3 @@
-
-version: '3.7'
-
 services:
   db:
     image: postgres:16.2
@@ -37,6 +34,14 @@ services:
       - ALLOWED_ORIGINS=http://localhost
     depends_on:
       - db
+
+  frontend:
+    image: ${STOCK_FRONTEND_IMAGE}
+    restart: "no"
+    ports:
+      - "4200:80"
+    depends_on:
+      - stockservice
 
 volumes:
   pgdata:

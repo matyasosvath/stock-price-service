@@ -5,16 +5,15 @@
     <div class="form-group">
       <label for="symbolInput">Enter Stock Symbol:</label>
       <input type="text" id="symbolInput" [(ngModel)]="symbol" class="form-control">
-      <button (click)="monitorStock()" class="btn btn-primary mt-3">Monitor Stock</button>
+      <button (click)="monitorStock()" class="btn btn-primary mt-3">Get Stock info</button>
     </div>
     <hr>
-    <div ngIf="stockInfo">
+    <div>
       <h2>Stock Information for {{ symbol }}</h2>
       <p><strong>Last Updated Time:</strong> {{ stockInfo?.lastUpdatedTime }}</p>
       <p><strong>Current Stock Price:</strong> ${{ stockInfo?.currentStockPrice }}</p>
       <p><strong>Moving Average:</strong> ${{ stockInfo?.movingAverage }}</p>
     </div>
   </div>
-  
 </main>
 

@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 
 interface StockInfo {
-  lastUpdatedTime: string;
-  currentStockPrice: number;
-  movingAverage: number;
+  lastUpdatedTime?: string;
+  currentStockPrice?: number;
+  movingAverage?: number;
 }
 
 @Component({
@@ -28,7 +26,6 @@ export class AppComponent {
 
   monitorStock(): void {
 
-    console.log("symbool hereee", this.symbol);
     if (!this.symbol) {
       this.error = 'Please enter a stock symbol.';
       return;
@@ -57,17 +54,8 @@ export class AppComponent {
           this.error = 'Failed to fetch stock information. Please try again later.';
         }
       );
+      console.log("Fetched latest stock information.");
   }
 
-  // private readonly backendUrl = 'http://stockservice:3001'; // Backend URL
 
-
-  // getStockData(symbol: string): Observable<any> {
-  //   return this.http.get(`${this.backendUrl}/stock/${symbol}`);
-  // }
-
-  // monitorStock(symbol: string): Observable<any> {
-  //   console.log("symbool hereee", this.symbol);
-  //   return this.http.put(`${this.backendUrl}/stock/${symbol}`, {});
-  // }
 }

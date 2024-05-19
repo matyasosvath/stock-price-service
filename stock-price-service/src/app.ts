@@ -1,6 +1,7 @@
 import express from "express";
 import actuator from "express-actuator";
 import cron from "node-cron";
+import cors from "cors"; 
 
 import logger from "./logger/logger";
 import {
@@ -14,7 +15,7 @@ const port = process.env.PORT || 3001;
 const app = express();
 
 app.use(actuator());
-
+app.use(cors());
 
 /**
  * @swagger

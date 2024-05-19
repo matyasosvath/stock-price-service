@@ -1,0 +1,94 @@
+/* Reset default styles to achieve a clean canvas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Define a sleek backdrop for the entire application */
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Subtle shade for a harmonious ambiance */
+  }
+  
+  /* Style the central content container for a polished presentation */
+  .container {
+    background-color: #fff; /* Crisp white background for clarity */
+    border-radius: 10px; /* Rounded corners for a refined touch */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth and dimension */
+    padding: 30px; /* Generous padding for spaciousness */
+    max-width: 500px; /* Optimal width for readability and focus */
+    width: 100%;
+  }
+  
+  /* Emphasize the application title with a sophisticated font and subtle spacing */
+  h1 {
+    margin-bottom: 20px; /* Elegant spacing below the title */
+    font-size: 32px; /* Graceful font size for prominence */
+    color: #333; /* Timeless dark hue for legibility */
+  }
+  
+  /* Refine the form group for a polished appearance */
+  .form-group {
+    margin-bottom: 20px; /* Subtle separation between form elements */
+  }
+  
+  /* Elevate the label style for prominence and clarity */
+  label {
+    display: block; /* Elegant display for clear alignment */
+    font-size: 18px; /* Refined font size for readability */
+    margin-bottom: 8px; /* Delicate spacing below the label */
+  }
+  
+  /* Enhance the input field with smooth borders and graceful transitions */
+  input {
+    width: 100%; /* Seamless width for optimal usability */
+    padding: 12px; /* Luxurious padding for comfort */
+    font-size: 16px; /* Elegant font size for legibility */
+    border: 1px solid #ccc; /* Subtle border for distinction */
+    border-radius: 6px; /* Gentle border radius for sophistication */
+    transition: border-color 0.3s ease; /* Smooth transition for visual appeal */
+  }
+  
+  /* Add refinement to the button with a graceful color palette and subtle effects */
+  button {
+    padding: 12px 24px; /* Refined padding for elegance */
+    font-size: 16px; /* Sophisticated font size for balance */
+    border: none; /* Clean removal of borders for seamless integration */
+    border-radius: 6px; /* Delicate border radius for harmony */
+    background-color: #007bff; /* Serene blue hue for tranquility */
+    color: #fff; /* Crisp white text for clarity */
+    cursor: pointer; /* Graceful cursor style for interactivity */
+    transition: background-color 0.3s ease; /* Smooth transition for subtle animation */
+  }
+  
+  /* Elevate the button on hover for a touch of interactivity */
+  button:hover {
+    background-color: #0056b3; /* Darker shade for depth and contrast */
+  }
+  
+  /* Provide a refined style for the stock information section */
+  .stock-info {
+    margin-top: 30px; /* Elegant spacing above the stock information */
+  }
+  
+  /* Style the stock information title with grace and prominence */
+  .stock-info h2 {
+    margin-bottom: 15px; /* Subtle spacing below the title */
+    font-size: 24px; /* Balanced font size for elegance */
+  }
+  
+  /* Refine the stock information details for clarity and precision */
+  .stock-info p {
+    font-size: 16px; /* Refined font size for readability */
+    margin-bottom: 10px; /* Delicate spacing between details */
+  }
+  
+  /* Accentuate the stock information labels for emphasis and clarity */
+  .stock-info strong {
+    font-weight: bold; /* Bold weight for emphasis */
+  }
+  
